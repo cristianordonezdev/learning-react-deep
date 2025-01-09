@@ -8,7 +8,9 @@ function App() {
     <>
       <Header />
       <main>
-
+        <header>
+          <h1>Hello world</h1>
+        </header>
         <CoreConcepts></CoreConcepts>
         <Examples></Examples>
       </main>

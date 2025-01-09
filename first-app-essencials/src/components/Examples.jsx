@@ -3,6 +3,7 @@ import { EXAMPLES } from '../data';
 import { useState } from 'react';
 import Section from './Section';
 import Tabs from './Tabs';
+import { styled } from 'styled-components'
 
 export default function Examples() {
   const [getSelected, setSelected] = useState();
@@ -10,8 +11,46 @@ export default function Examples() {
     setSelected(selectedButton);
   }
 
+  const SectionComponentStyled = styled.section`
+    margin: 3rem auto;
+
+    & h2 {
+      text-align: left;
+    }
+
+    & menu {
+      margin: 1rem 0;
+      padding: 0;
+      display: flex;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    & menu button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: transparent;
+      color: #a18aba;
+      font-family: "Roboto Condensed", sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    & menu button:hover {
+      background-color: #1b082f;
+      color: #ebe7ef;
+    }
+
+    & menu button.active {
+      background-color: #7925d3;
+      color: #ebe7ef;
+    }
+  `
+
   return (
-    <Section title={'Some examples here'} id='examples'>
+    <SectionComponentStyled title={'Some examples here'} id='examples'>
       <Tabs ButtonsContainer="menu" buttons={
         <>
           <TabButton isSelected={getSelected === 'components'} onClick={() => handleClick('components')}>Components </TabButton>
@@ -37,6 +76,6 @@ export default function Examples() {
           </div>
         }
       </div>
-    </Section>
+    </SectionComponentStyled>
   )
 }
