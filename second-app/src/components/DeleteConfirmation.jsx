@@ -1,4 +1,13 @@
+import { useEffect } from "react";
+
+
 export default function DeleteConfirmation({ onConfirm, onCancel }) {
+
+  useEffect(() => {
+    console.log('herre i am')
+
+  }, [])
+
   return (
     <div id="delete-confirmation">
       <h2>Are you sure?</h2>
@@ -10,6 +19,7 @@ export default function DeleteConfirmation({ onConfirm, onCancel }) {
         <button onClick={onConfirm} className="button">
           Yes
         </button>
+        {/* <progress value={remainingTime} max={TIMER}></progress> */}
       </div>
     </div>
   );
