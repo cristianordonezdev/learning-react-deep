@@ -13,9 +13,7 @@ function App() {
   const selectedPlace = useRef();
 
   const [errorUpdatingPlaces, setErrorUpdatingPlaces] = useState();
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
   const {isFetching, getFetchData: userPlaces, errorFetching: error, setFetchData: setUserPlaces} = useFetch(fetchUserPlaces, [])
 
   function handleStartRemovePlace(place) {
