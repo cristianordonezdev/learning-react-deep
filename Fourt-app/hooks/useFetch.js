@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
 
-function useFetch(fetchFn, defaultData, messageError) {
+function useFetch(fetchFn, defaultData) {
   const [isFetching, setIsFetching] = useState(false);
-  const [errorFetching, setError] = useState(messageError);
-  const [fetchData, setFetchData] = useState(defaultData)
+  const [errorFetching, setError] = useState("");
+  const [getFetchData, setFetchData] = useState(defaultData)
 
   useEffect(() => {
     async function fetchData() {
       setIsFetching(true);
       try {
         const data = await fetchFn();
+
         setFetchData(data);
       } catch (error) {
         setError({ message: error.message || messageError });
@@ -18,11 +19,13 @@ function useFetch(fetchFn, defaultData, messageError) {
     }
     fetchData();
   }, [fetchFn]);
+  
 
   return {
     isFetching,
     errorFetching,
-    fetchData,
+    getFetchData,
+    setFetchData
   }
 }
 
