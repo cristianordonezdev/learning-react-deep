@@ -1,4 +1,6 @@
 import Header from "./components/Header";
+import Signup from "./components/Signup";
+import Register from "./components/Register.jsx";
 import Login from "./components/Login";
 
 function App() {
@@ -6,7 +8,9 @@ function App() {
     <>
       <Header />
       <main>
-        <Login />
+        <Signup></Signup>
+        <Register></Register>
+        <Login></Login>
       </main>
     </>
   );
