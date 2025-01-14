@@ -1,4 +1,6 @@
-import { useState } from "react"
+import { useState } from "react";
+import InputElement from "./InputElement";
+import { isEmail, isNotEmpty, hasMinLength } from "../util/validation";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -11,8 +13,8 @@ export default function Register() {
     password: false
   })
 
-  const emailIsValid = stateForm.email && !form.email.includes("@")
-  const passwordIsValid = stateForm.password && form.password.length < 4;
+  const emailIsValid = stateForm.email && !isEmail(form.email)
+  const passwordIsValid = stateForm.password && !hasMinLength(form.password, 4)
 
 
   function handleSubmit(event) {
@@ -37,25 +39,26 @@ export default function Register() {
       <h2>Register using UseState</h2>
 
       <div className="control-row">
-        <div className="control no-margin">
-          <label htmlFor="email">Email</label>
-          <input id="email" type="email" name="email" 
-            onChange={(event) => handleOnChangeForm("email", event.target.value)} value={form.email}
-            onBlur={(event) => handleOnBlurForm("email", event.target.value)}
-          />
-          {emailIsValid && <span className="control-error">Please enter a valid email</span>}
-        </div>
+        <InputElement
+          label="Email"
+          id="email"
+          name="email" 
+          onChange={(event) => handleOnChangeForm("email", event.target.value)} 
+          value={form.email}
+          onBlur={(event) => handleOnBlurForm("email", event.target.value)}
+          error={emailIsValid && "Please enter a valid email reused component"}
+        ></InputElement>
 
-        <div className="control no-margin">
-          <label htmlFor="password">Password</label>
-          <input id="password" type="password" name="password" 
-            onChange={(event) => handleOnChangeForm("password", event.target.value)}
-            onBlur={(event) => handleOnBlurForm("password", event.target.value)}
-            value={form.password}
-          />
-          {passwordIsValid && <span className="control-error">Please enter a strong password</span>}
+        <InputElement
+          label="Password"
+          id="password"
+          name="password" 
+          onChange={(event) => handleOnChangeForm("password", event.target.value)}
+          onBlur={(event) => handleOnBlurForm("password", event.target.value)}
+          value={form.password}
+          error={passwordIsValid && "The password is not strong"}
+        ></InputElement>
 
-        </div>
       </div>
 
       <p className="form-actions">
