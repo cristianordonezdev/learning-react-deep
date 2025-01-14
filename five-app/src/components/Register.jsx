@@ -1,20 +1,22 @@
-import { useState } from "react";
 import InputElement from "./InputElement";
-import { isEmail, isNotEmpty, hasMinLength } from "../util/validation";
+import { isEmail, hasMinLength } from "../util/validation";
+import useInput from "../hooks/useInput";
 
 export default function Register() {
-  const [form, setForm] = useState({
-    email: "",
-    password: ""
-  })
+  const {
+    value: emailValue, 
+    handleOnBlurForm: handleOnBlurEmail, 
+    handleOnChangeForm: handleOnChangeEmail,
+    hasError: emailIsValid
+  } = useInput("", (value) => (isEmail(value)))
 
-  const [stateForm, setStateForm] = useState({
-    email: false,
-    password: false
-  })
+  const {
+    value: passwordValue, 
+    handleOnBlurForm: handleOnBlurPassword, 
+    handleOnChangeForm: handleOnChangePassword,
+    hasError: passwordIsValid
+  } = useInput("", (value) => hasMinLength(value, 4))
 
-  const emailIsValid = stateForm.email && !isEmail(form.email)
-  const passwordIsValid = stateForm.password && !hasMinLength(form.password, 4)
 
 
   function handleSubmit(event) {
@@ -22,17 +24,6 @@ export default function Register() {
     console.log("Hello world", form)
   }
  
-  function handleOnChangeForm(id, value) {
-    setForm((old_values) => ({...old_values, [id]: value}))
-    setStateForm((old_values) => ({...old_values, [id]: false}))
-  }
-
-  function handleOnBlurForm(id, value) {
-    setStateForm((old_value) => ({
-      ...old_value,
-      [id]: value
-    }))
-  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -43,9 +34,9 @@ export default function Register() {
           label="Email"
           id="email"
           name="email" 
-          onChange={(event) => handleOnChangeForm("email", event.target.value)} 
-          value={form.email}
-          onBlur={(event) => handleOnBlurForm("email", event.target.value)}
+          onChange={handleOnChangeEmail}
+          value={emailValue}
+          onBlur={handleOnBlurEmail}
           error={emailIsValid && "Please enter a valid email reused component"}
         ></InputElement>
 
@@ -53,9 +44,9 @@ export default function Register() {
           label="Password"
           id="password"
           name="password" 
-          onChange={(event) => handleOnChangeForm("password", event.target.value)}
-          onBlur={(event) => handleOnBlurForm("password", event.target.value)}
-          value={form.password}
+          onChange={handleOnChangePassword}
+          onBlur={handleOnBlurPassword}
+          value={passwordValue}
           error={passwordIsValid && "The password is not strong"}
         ></InputElement>
 
