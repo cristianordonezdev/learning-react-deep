@@ -1,4 +1,4 @@
-import { useReducer, useState, useRef } from "react"
+import { useState } from "react"
 
 export default function Register() {
   const [form, setForm] = useState({
