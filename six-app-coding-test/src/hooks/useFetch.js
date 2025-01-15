@@ -1,31 +1,32 @@
-import { useState } from 'react';
-import useEffectOnce from './useEffectOnce';
+import { useEffect, useState } from 'react'
 
 function useFetch(fetchFn, defaultData) {
   const [isFetching, setIsFetching] = useState(false);
   const [errorFetching, setError] = useState("");
-  const [getFetchData, setFetchData] = useState(defaultData);
+  const [getFetchData, setFetchData] = useState(defaultData)
 
-  useEffectOnce(() => {
+  useEffect(() => {
     async function fetchData() {
       setIsFetching(true);
       try {
         const data = await fetchFn();
+
         setFetchData(data);
       } catch (error) {
-        setError({ message: error.message || "Error fetching data" });
+        setError({ message: error.message || messageError });
       }
       setIsFetching(false);
     }
     fetchData();
-  });
+  }, [fetchFn]);
+  
 
   return {
     isFetching,
     errorFetching,
     getFetchData,
     setFetchData
-  };
+  }
 }
 
 export default useFetch;
