@@ -21,3 +21,8 @@
   margin: 2rem 0;
   font-weight: bold;
 }
+
+.butts button {
+  margin: 1rem !important;
+  background-color: red !important;
+}
