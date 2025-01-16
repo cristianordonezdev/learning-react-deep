@@ -4,9 +4,7 @@ export default function Modal({close_modal, children}) {
       <div className="cart">
         <div className="text-button-close-icon" onClick={close_modal}>X</div>
         {children}
-        <div className="modal-actions">
 
-        </div>
       </div>
     </div>
   )
