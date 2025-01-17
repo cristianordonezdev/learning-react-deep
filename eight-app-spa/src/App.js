@@ -4,6 +4,7 @@ import {createBrowserRouter, RouterProvider,
 } from 'react-router-dom';
 import Home from './pages/Home';
 import Products from './pages/Products';
+import Root from './pages/Root';
 
 // OLD WAY TO IMPLEMENT
 // const routeDefinitions = createRoutesFromElements(
@@ -15,9 +16,22 @@ import Products from './pages/Products';
 // const router = createBrowserRouter(routeDefinitions)
 
 const router = createBrowserRouter([
-  {path: '/', element: <Home/>},
-  {path: '/products', element: <Products/>},
+  {
+    path: '/', 
+    element: <Root/>,
+    children: [
+      {path: '/', element: <Home/>},
+      {path: '/products', element: <Products/>},
+    ]
+  },
+  // We can have multiple root elements
+  // {
+  //   path: '/admin', 
+  //   element: <Root/>,
+  //   children: [
 
+  //   ]
+  // },
 ])
 
 function App() {
