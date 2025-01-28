@@ -293,3 +293,15 @@ h1 {
     transform: translateY(0);
   }
 }
+
+.navlink {
+  color: aliceblue;
+  margin: 1em;
+}
+
+.main-container {
+  padding: 2em;
+}
+.image-about {
+  width: 300px;
+}
